@@ -13,7 +13,7 @@ Typical uses:
 
 ## Requirements
 - Unreal Engine 5.7
-- The "Gameplay Abilities" engine plugin must be enabled
+- The "Gameplay Abilities" engine plugin must be enabled in the editor
 - Optional: Visual Studio 2022 with the “Game development with C++” workload (Windows) for expanding the codebase
 
 ## Installation
@@ -40,19 +40,30 @@ Typical uses:
 
 ## Verify it’s working
 - Open Unreal Editor → **Edit → Plugins** and confirm the *Ammo Component* plugin is listed and enabled (also make sure *GameplayAbilities* is enabled).
-- In the **Add Component** menu for your Base weapon Blueprint, confirm the ammo-tracking component (Display name is *WeaponComponent*) entry appears and add it.
-- Confirm the Starting Ammo properties are now exposed, these values should be set in your Child weapon blueprints (set image here)
+![Plugin setup](/Images/Plugin1.png)
+![GAS Setup](/Images/GAS1.png)
 
-- To initialize the component, an Ability System component is required on your Base pawn class. Add one, and then call the 'Initialize with ASC' function (add image)
+- In the **Add Component** menu for your Base weapon Blueprint, confirm the ammo-tracking component (Default display name is *WeaponAmmo*) entry appears and add it.
+![Component Setup 1](/Images/ComponentSetup1.png)
 
-- In your firing logic, use the "Can Weapon Fire" function to check if ammo is available (add image)
-  
+- Confirm the Starting Ammo properties are now exposed, these values should be set in your Child weapon blueprints:
+![Component Setup 2](/Images/ComponentSetup2.png)
 
-- Next, add the "Consume Ammo" node in your firing logic (add image)
+- To initialize the component, an Ability System component is required on your Base pawn class. Add one, and then call the 'Initialize with ASC' function:
+![Initialize Ability System](/Images/ASC.png)
 
-- For reloading, map the "Reload" function to the key of your choice (add image)
+- In your firing logic, use the "Can Weapon Fire" function to check if ammo is available:
+![Firing Logic 1](/Images/ComponentSetup.png)
+![Full Firing Graph](/Images/FireLogic.png)
+
+- Next, add the "Consume Ammo" node in your firing logic:
+![Consume Ammo on fire](/Images/ConsumeAmmo.png)
+
+- For reloading, map the "Reload" function to the key of your choice:
+![Reload Function](/Images/Reload.png)
 
 - To integrate with UI, use the built-in Ammo Subsystem to retrieve the player's Ammo and Magazine count (add image)
+![Using Subsystem](/Images/Subsystem.png)
 
 ## Troubleshooting
 - If you see “Missing modules” on startup: regenerate project files and rebuild in Visual Studio.
