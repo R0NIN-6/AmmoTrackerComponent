@@ -1,5 +1,6 @@
 
 # AmmoTrackerComponent (Unreal Engine 5.7 C++ Plugin)
+- Version 1.22
 
 ## Description
 AmmoTrackerComponent is a lightweight Unreal Engine 5.7 C++ plugin intended to provide an easy, reusable way to track ammo counts for weapons (e.g., current ammo, reserve ammo, max capacity) via a component that can be attached to weapon actors.
@@ -13,7 +14,7 @@ Typical uses:
 
 ## Requirements
 - Unreal Engine 5.7
-- The "Gameplay Abilities" engine plugin must be enabled in the editor
+- The "Gameplay Abilities" and "Enhanced Input" engine plugins must be enabled in the editor
 - Optional: Visual Studio 2022 with the “Game development with C++” workload (Windows) for expanding the codebase
 
 ## Installation
@@ -30,16 +31,23 @@ Typical uses:
 7. In Unreal Editor, go to **Edit → Plugins**, find the plugin, and enable it if needed.
 8. Restart the editor when prompted.
 
-### Option B: Install to the engine (shared across projects)
-1. Close the Unreal Editor.
-2. Copy the plugin folder into your engine installation:
-	- `<UE_5.7>/Engine/Plugins/Marketplace/AmmoTrackerComponent/`
-	- (If `Marketplace` doesn’t exist, create it.)
-3. Rebuild the engine/plugin as needed (or let the editor prompt you to build).
-4. Enable the plugin via **Edit → Plugins** and restart the editor.
+
+## Ammo Tracking Modes
+
+The ammo tracking system now supports two modes:
+
+- **Traditional Reserve Ammo** with basic reload: Discarded ammo is kept on reloads and consolidated into a reserve pool. You can keep reloading as long as the reserve pool is greater than the magazine's capacity. This is how most FPS games track ammo, and it is the default setting. It also requires minimal setup.
+- **Strict Magazine Mode** with dynamic reload: Supports two reload types:
+	1. **Fast**: Discards the magazine and any remaining bullets in it.
+	2. **Slow**: Replaces the magazine with a new one and returns the old one to the kit.
+
+	This mode is common in many mil-sims. Ammo is not automatically consolidated, and magazines are tracked individually. You can reload as long as you have at least one magazine in your kit that still contains bullets.
+
+> Note: This mode uses Enhanced Input to handle both reload types. A sample input setup is provided in the plugin's Content folder. 
+
 
 ## Verify it’s working
-- Open Unreal Editor → **Edit → Plugins** and confirm the *Ammo Component* plugin is listed and enabled (also make sure *GameplayAbilities* is enabled).
+- Open Unreal Editor → **Edit → Plugins** and confirm the *Ammo Component* plugin is listed and enabled (also make sure *GameplayAbilities* and *EnhancedInput* is enabled).
 ![Plugin setup](/Images/Plugin1.png)
 ![GAS Setup](/Images/GAS1.png)
 
